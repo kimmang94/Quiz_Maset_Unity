@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
+
 
 public class Quiz : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI questionText = null;
+    [SerializeField]
+    private QuestionSO question = null;
+    
+    private void Start()
     {
-        
+        questionText.text = question.GetQuestion();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
