@@ -14,7 +14,6 @@ public class Quiz : MonoBehaviour
     private QuestionSO question = null;
     [SerializeField]
     private GameObject[] answerButtons;
-
     private int correctAnswerIndex = 0;
     [SerializeField]
     private Sprite defaultSprite= null;
@@ -23,8 +22,15 @@ public class Quiz : MonoBehaviour
     
     private void Start()
     {
-        questionText.text = question.GetQuestion();
+        DisplayQuestion();
+    }
 
+    /// <summary>
+    /// 정답을 맞출시 문제 출력 Text 에  정답text를 보여주는 기능
+    /// </summary>
+    private void DisplayQuestion()
+    {
+        questionText.text = question.GetQuestion();
         for (int i = 0; i < answerButtons.Length; i++)
         {
             TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
@@ -32,6 +38,26 @@ public class Quiz : MonoBehaviour
         }
     }
 
+    private void GetNetxQuestion()
+    {
+        SetButtonState(true);
+        DisplayQuestion();
+        ;
+    }
+    
+    /// <summary>
+    /// 정답 선택시 버튼기능 비활성화
+    /// </summary>
+    /// <param name="state"></param>
+    private void SetButtonState(bool state)
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Button button = answerButtons[i].GetComponent<Button>();
+            button.interactable = state;
+        }
+    }
+    
     /// <summary>
     /// 정답 index를 선택해서 정답이면 정답효과, 오답시 오답효과
     /// </summary>
@@ -53,6 +79,8 @@ public class Quiz : MonoBehaviour
             buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
         }
+
+        SetButtonState(false);
     }
 
 }
