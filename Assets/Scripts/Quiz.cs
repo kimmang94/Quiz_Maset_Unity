@@ -22,7 +22,8 @@ public class Quiz : MonoBehaviour
     
     private void Start()
     {
-        DisplayQuestion();
+       // DisplayQuestion();
+        GetNetxQuestion();
     }
 
     /// <summary>
@@ -38,11 +39,14 @@ public class Quiz : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 버튼을 다시 누를수있게 만들고 다음 문제를 제시하는 기능
+    /// </summary>
     private void GetNetxQuestion()
     {
         SetButtonState(true);
+        SetDefaultButtonSprites();
         DisplayQuestion();
-        ;
     }
     
     /// <summary>
@@ -83,4 +87,15 @@ public class Quiz : MonoBehaviour
         SetButtonState(false);
     }
 
+    /// <summary>
+    /// 기본 버튼으로 변경
+    /// </summary>
+    private void SetDefaultButtonSprites()
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Image buttonImage = answerButtons[i].GetComponent<Image>();
+            buttonImage.sprite = defaultSprite;
+        }
+    }
 }
